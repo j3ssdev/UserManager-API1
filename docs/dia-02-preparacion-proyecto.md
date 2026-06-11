@@ -22,17 +22,17 @@ http://localhost:3000
   "message": "UserManager API"
 }
 ```
-![GET localhost](./images/dia2_postman_get_localhost.jpg)
+![GET localhost](./Images/dia2_postman_get_localhost.jpg)
 
 ## Parte libre
 ### Tarea libre 1: Personalizar el mensaje inicial
 Modifica la respuesta de la ruta / para que devuelva algo más completo.
-![GET localhost](./images/dia2_postman_get_localhost_modificado.jpg)
+![GET localhost](./Images/dia2_postman_get_localhost_modificado.jpg)
 
 ### Tarea libre 2: Añadir una segunda ruta temporal
 Crea una ruta nueva:  GET /api/info
 Esta ruta debe devolver información básica del proyecto.
-![GET localhost](./images/dia2_postman_get_apiinfo.png.jpg)
+![GET localhost](./Images/dia2_postman_get_apiinfo.png.jpg)
 
 ## Tarea libre 3: Breve explicacion
 
