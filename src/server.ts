@@ -23,6 +23,22 @@ app.get("/api/info", (req, res) => {
     technologies: ["Node.js", "Express", "TypeScript"]
   });
 });
+// Dia 3:Endpoint para comprobar que la API está funcionando
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "UserManager API funcionando",
+    timestamp: new Date().toISOString(),
+    "version": "1.0.0",
+    "environment": "development"
+  });
+});
+app.get("/api/ping", (req, res) => {
+    res.json({
+        message: "Pong"
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
