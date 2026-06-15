@@ -27,6 +27,7 @@ La API se ejecutará inicialmente en:
 ```text
 http://localhost:3000
 ```
+
 ## Endpoints disponibles
 
 ### Health
@@ -44,6 +45,20 @@ Respuesta esperada:
   "timestamp": "2026-01-01T10:00:00.000Z"
 }
 ```
+
+## Endpoints simulados de usuarios
+
+```http
+GET /api/users
+GET /api/users/:id
+POST /api/users
+PATCH /api/users/:id
+DELETE /api/users/:id
+```
+
+Estos endpoints todavía no trabajan con datos reales. De momento sirven para
+practicar métodos HTTP, rutas, parámetros y body.
+
 ## Documentación del reto
 
 - [Día 1 - Diseño inicial](docs/dia-01-diseno-inicial-usermanager.md)
