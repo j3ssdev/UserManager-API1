@@ -42,7 +42,7 @@ User
 | `PATCH` | `/api/users/:id/status` | Activa o desactiva un usuario | `ADMIN` |
 
 ## Flujo general
-![Esquema de flujo](./Images/esquema_flijo_API.jpg)
+![Esquema de flujo](./Images/esquema_flujo_Api.png)
 
 El cliente envía una petición a la API. La API valida los datos, aplica la lógica necesaria, consulta o modifica la base de datos y devuelve una respuesta.
 

@@ -56,4 +56,4 @@ Provoca intencionadamente un pequeño error, por ejemplo:
 * **Qué crees que significaba:** El servidor está funcionando perfectamente, pero cuando el cliente (Postman) llamó a la dirección `/api/nfo`, Express miró en su lista de rutas registradas y no encontró ninguna que coincidiera exactamente con esa URL y ese método GET.
 * **Cómo lo solucionaste:** Escribí correctamente la ruta.
 
-![GET localhost erroneo](./images/dia2_postman_get_enrruta.jpg)
+![GET localhost erroneo](./Images/dia2_postman_get_enrruta.jpg)

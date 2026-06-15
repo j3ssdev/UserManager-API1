@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-
+//Tarea libre 1: personalizar el mensaje 
 app.get("/", (req, res) => {
   res.json({
     name: "UserManager API",
@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     description: "API para la gestión completa de usuarios"
   });
 });
-// Crear una ruta completamente nueva
+//  Tarea libre 2: crear una ruta completamente nueva
 app.get("/api/info", (req, res) => {
   res.json({
     project: "UserManager API",
@@ -23,7 +23,7 @@ app.get("/api/info", (req, res) => {
     technologies: ["Node.js", "Express", "TypeScript"]
   });
 });
-// Dia 3:Endpoint para comprobar que la API está funcionando
+// Dia 3:Endpoint para comprobar que la API está funcionando, añadir ruta health
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     status: "ok",
@@ -33,6 +33,7 @@ app.get("/api/health", (req, res) => {
     "environment": "development"
   });
 });
+// --- Dia 3: Parte libre ---
 app.get("/api/ping", (req, res) => {
     res.json({
         message: "Pong"
