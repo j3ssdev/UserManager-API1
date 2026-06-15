@@ -48,10 +48,10 @@ app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
 ```
-![GET /api/health](./images/dia3_apiHealth_ok.jpg)
-![GET /api/health](./images/dia3_apiHealth_ok2.jpg)
+![GET /api/health](./Images/dia3_apiHealth_ok.jpg)
+![GET /api/health](./Images/dia3_apiHealth_ok2.jpg)
 Debajo de la ruta /, añade esta nueva ruta:
-![GET /api/health](./images/dia3_apiHealth_ok3.jpg)
+![GET /api/health](./Images/dia3_apiHealth_ok3.jpg)
 
 ## Explicación personal
 Parte libre
