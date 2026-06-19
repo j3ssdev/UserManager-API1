@@ -220,7 +220,6 @@ La respuesta esperada:
 ```
 
 ![GET /api/health](./Images/dia4_paso6_BodyJSON_Final.jpg)
-
 De momento estamos devolviendo tambien la contraseña porque estamos simulando. Mas adelante no se devolvera ninguna contraseña.
 
 
