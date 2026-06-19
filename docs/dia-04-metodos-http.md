@@ -33,7 +33,6 @@ DELETE sirve para eliminar o desactivar un recurso.
 
 Abre el repositorio del reto:
 
-
 Entra en la carpeta del proyecto:
 
 ```bash
@@ -80,7 +79,8 @@ Abre:
 ```bash
 src/server.ts
 ```
-Al abrir nos saldra algo parecido a esto: 
+
+Al abrir nos saldra algo parecido a esto:
 
 ```bash
 import express from "express";
@@ -130,7 +130,7 @@ Esta ruta todavia no devuelve usuarios reales. Devuelve un array vacio para simu
 GET http://localhost:3000/api/users
 ```
 
-Prueba: 
+Prueba:
 
 ![GET /api/health](./Images/dia4_paso4_pruebaGet.jpg)
 
@@ -219,7 +219,7 @@ La respuesta esperada:
 }
 ```
 
-![GET /api/health](./Images/dia4_paso6_BodyJSON_Final.jpg)
+![GET /api/health](./Images/)
 De momento estamos devolviendo tambien la contraseña porque estamos simulando. Mas adelante no se devolvera ninguna contraseña.
 
 
