@@ -307,7 +307,7 @@ Después se pueden enviar peticiones desde Thunder Client, Postman o una herrami
 | PATCH /api/users/1  | Sí   | 200             | Devuelve el id y los cambios    |
 | DELETE /api/users/1 | No   | 200             | Devuelve el id recibido|
 
-# Parte guiada
+# PARTE GUIADA
 
 ## Paso 1: Abrir el proyecto
 
@@ -469,7 +469,7 @@ app.post("/api/users", (req, res) => {
 
 Prueba:
 
-```bash
+```http
 POST http://localhost:3000/api/users
 ```
 
@@ -477,7 +477,7 @@ POST http://localhost:3000/api/users
 
 En el body envía JSON:
 
-```ts
+```bash
 {
   "name": "Carlos Pérez",
   "email": "carlos@email.com",
@@ -488,7 +488,7 @@ En el body envía JSON:
 ![GET /api/health](./Images/dia4_paso6_BodyJSON_Guardar.jpg)
 La respuesta esperada:
 
-```ts
+```bash
 {
   "message": "Usuario recibido para crear",
   "data": {
@@ -499,8 +499,87 @@ La respuesta esperada:
 }
 ```
 
-![GET /api/health](./Images/dia4_paso6_BodyJSON_Final.jpg)
+![GET /api/health](./Images/dia4_prueba6_AñadirRutaPost.jpg)
+
 De momento estamos devolviendo tambien la contraseña porque estamos simulando. Mas adelante no se devolvera ninguna contraseña.
+![GET /api/health](./Images/dia4_paso6_BodyJSON_Final.jpg)
 
+## Paso 7: Crear una ruta PATCH para usuarios
 
+Añade esta ruta:`
+
+```bash
+app.patch("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  res.status(200).json({
+    message: "Usuario recibido para actualizar",
+    id: id,
+    changes: changes
+  });
+});
+```
+
+![GET /api/health](./Images/dia4_paso7_AnadirRuta.jpg)
+
+Prueba:
+
+```http
+PATCH http://localhost:3000/api/users/1
+```
+
+Body:
+
+```bash
+{
+  "name": "Carlos Actualizado"
+}
+```
+
+Respuesta esperada:
+
+```bash
+{
+  "message": "Usuario recibido para actualizar",
+  "id": "1",
+  "changes": {
+    "name": "Carlos Actualizado"
+  }
+}
+```
+
+![GET /api/health](./Images/dia4_paso7_RespuestaEsperada.jpg)
+
+## Paso 8: Crear una ruta DELETE para usuarios
+
+Añade esta ruta:
+
+```bash
+app.delete("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  res.status(200).json({
+    message: "Usuario recibido para eliminar o desactivar",
+    id: id
+  });
+});
+```
+
+Prueba:
+
+```bash
+DELETE http://localhost:3000/api/users/1
+```
+
+Respuesta esperada:
+
+```bash
+{
+  "message": "Usuario recibido para eliminar o desactivar",
+  "id": "1"
+}
+```
+
+![GET /api/health](./Images/dia8_paso8_Delete.jpg)
 
