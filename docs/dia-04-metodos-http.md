@@ -176,7 +176,7 @@ Respuesta simulada:
 
 En proyectos reales, muchas veces no se borra físicamente un usuario. Es común hacer un borrado lógico, por ejemplo cambiando un campo como:
 
-```http
+```bash
 isActive = false
 ```
 
@@ -186,7 +186,7 @@ Esto permite conservar historial y evitar pérdidas de información.
 
 En src/server.ts se han añadido estas rutas:
 
-```json
+```bash
 app.get("/api/users", (req, res) => {
   res.status(200).json({
     message: "Listado de usuarios",
@@ -239,7 +239,7 @@ El body es el cuerpo de la petición. Sirve para enviar datos al servidor, espec
 
 Este proyecto puede leer JSON gracias a esta línea:
 
-```json
+```bash
 app.use(express.json());
 ```
 
@@ -247,7 +247,7 @@ Sin ese middleware, Express no interpretaría correctamente los datos enviados e
 
 Ejemplo de lectura del body:
 
-```json
+```bash
 app.post("/api/users", (req, res) => {
   const userData = req.body;
 
@@ -272,7 +272,7 @@ GET /api/users/25
 
 En Express se define una sola ruta dinámica:
 
-```json
+```bash
 app.get("/api/users/:id", (req, res) => {
   const { id } = req.params;
 
@@ -285,7 +285,7 @@ app.get("/api/users/:id", (req, res) => {
 
 La parte :id se puede leer desde:`
 
-```http
+```bash
 req.params
 ```
 
@@ -293,7 +293,7 @@ req.params
 
 Para probar las rutas, primero se arranca el servidor:
 
-```http
+```bash
 npm run dev
 ```
 
@@ -306,13 +306,6 @@ Después se pueden enviar peticiones desde Thunder Client, Postman o una herrami
 | POST /api/users     | Sí   | 201             | Devuelve los datos enviados     |
 | PATCH /api/users/1  | Sí   | 200             | Devuelve el id y los cambios    |
 | DELETE /api/users/1 | No   | 200             | Devuelve el id recibido|
-
-## Explicación personal
-
-GET sirve para obtener información.
-POST sirve para crear información.
-PATCH sirve para modificar parte de un recurso.
-DELETE sirve para eliminar o desactivar un recurso.
 
 # Parte guiada
 
