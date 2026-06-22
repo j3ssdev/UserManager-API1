@@ -25,7 +25,9 @@
 | Body | Datos enviados por el cliente en una petición |
 | Parámetro de ruta | Parte variable de una URL, como ``:id`` |
 | Status code | Código que comunica el resultado de una petición |
+
 ## Relacion entre GRUD y métpodos HTTP
+
 CRUD significa:
 
 | Operación | Significado | Método HTTP habitual | Ejemplo |
@@ -443,7 +445,7 @@ Prueba:
 
 La respuesta es la esperada, tiene que salir:
 
-```bash
+```json
 {
   "message": "Detalle de usuario",
   "id": "1"
@@ -574,7 +576,7 @@ DELETE http://localhost:3000/api/users/1
 
 Respuesta esperada:
 
-```json
+```bash
 {
   "message": "Usuario recibido para eliminar o desactivar",
   "id": "1"
