@@ -574,7 +574,7 @@ DELETE http://localhost:3000/api/users/1
 
 Respuesta esperada:
 
-```bash
+```json
 {
   "message": "Usuario recibido para eliminar o desactivar",
   "id": "1"
