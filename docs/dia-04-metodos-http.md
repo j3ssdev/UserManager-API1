@@ -585,3 +585,13 @@ Respuesta esperada:
 
 ![GET /api/health](./Images/dia8_paso8_Delete.jpg)
 
+# PARTE LIBRE
+
+## Tarea libre 1: Añadir una ruta para consultar tu propio perfil
+
+Crea una ruta simulada:
+
+```bash
+GET /api/users/me
+```
+

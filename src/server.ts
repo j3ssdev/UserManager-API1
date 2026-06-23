@@ -47,6 +47,16 @@ app.get("/api/ping", (req, res) => {
     data: []
   });
 });
+// Tarea libre 1: Añadir una ruta para consultar tu propio perfil
+app.get("/api/users/me", (req, res) => {
+    res.status(200).json({
+        "id": 1,
+        "name": "Jesica Sama",
+        "email": "jesica@email.com",
+        "role": "USER",
+        "isActive": true
+    });
+});
 // Dia 4 ,Paso 5: Crear una ruta GET por ID¶
 app.get("/api/users/:id", (req, res) => {
   const { id } = req.params;
@@ -82,6 +92,70 @@ app.delete("/api/users/:id", (req, res) => {
   res.status(200).json({
     message: "Usuario recibido para eliminar o desactivar",
     id: id
+  });
+});
+// Tarea Libre 2
+app.patch("/api/users/:id/status", (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  res.status(200).json({
+    message: "Estado de usuario recibido para actualizar",
+    id: id,
+    isActive: false
+  });
+});
+// Tarea Libre 3
+app.patch("/api/users/:id/role", (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  res.status(200).json({
+    message: "Rol de usuario recibido para actualizar",
+    id: "1",
+    isActive: "ADMIN"
+  });
+});
+//Dia 5: Paso 3: Crear una ruta para probar body
+app.post("/api/debug/body", (req, res) => {
+  res.status(200).json({
+    message: "Body recibido correctamente",
+    body: req.body
+  });
+});
+// Dia 5: Paso 4: Crear una ruta para probar query
+app.get("/api/debug/params/:id", (req, res) => {
+  res.status(200).json({
+    message: "Params recibidos correctamente",
+    params: req.params
+  });
+});
+// Dia 5: Paso 5Crear una ruta para probar query params
+app.get("/api/debug/query", (req, res) => {
+  res.status(200).json({
+    message: "Query params recibidos correctamente",
+    query: req.query
+  });
+});
+//Dia 5:Paso 6: Crear una ruta para probar headers
+app.get("/api/debug/headers", (req, res) => {
+  res.status(200).json({
+    message: "Headers recibidos correctamente",
+    headers: req.headers
+  });
+});
+app.patch("/api/debug/users/:id", (req, res) => {
+  const { id } = req.params;
+  const { notify } = req.query;
+  const authorization = req.headers.authorization;
+  const changes = req.body;
+
+  res.status(200).json({
+    message: "Datos combinados recibidos",
+    id,
+    notify,
+    authorization,
+    changes
   });
 });
 app.listen(PORT, () => {
