@@ -39,7 +39,7 @@ app.get("/api/ping", (req, res) => {
         message: "Pong"
     });
 });
-// Dia 4, paso 4: Crear una ruta GET para usuarios¶
+// Dia 4, paso 4: Crear una ruta GET para usuarios
 
  app.get("/api/users", (req, res) => {
   res.status(200).json({
@@ -76,9 +76,11 @@ app.get("/api/users/:id", (req, res) => {
     id: id
   });
 });
-// Paso 6: Crear una ruta POST para usuarios
+// Dia 4:Paso 6: Crear una ruta POST para usuarios
 app.post("/api/users", (req, res) => {
   const userData = req.body;
+  
+  console.log("Body recibido en POST /api/users:", userData);
 
   res.status(201).json({
     message: "Usuario recibido para crear",
@@ -185,7 +187,18 @@ app.get("/api/debug/client", (req, res) => {
     client: clientName
   });
 });
-
+// Dia 6 -Crear una ruta temporal para depuracion
+app.post("/api/debug/request", (req, res) => {
+  res.status(200).json({
+    message: "Información completa de la petición",
+    method: req.method,
+    path: req.path,
+    params: req.params,
+    query: req.query,
+    headers: req.headers,
+    body: req.body
+  });
+});
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
