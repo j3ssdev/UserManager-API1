@@ -57,7 +57,17 @@ app.get("/api/users/me", (req, res) => {
         "isActive": true
     });
 });
-// Dia 4 ,Paso 5: Crear una ruta GET por ID¶
+// Dia 5 - Tarea libre 1: Crear una ruta de búsqueda simulada
+app.get("/api/users/search", (req, res) => {
+  res.status(200).json({
+    message: "Búsqueda de usuarios",
+    filters: {
+      name: "ana",
+      role: "USER"
+    }
+  });
+});
+// Dia 4 ,Paso 5: Crear una ruta GET por ID (ruta dinamica)
 app.get("/api/users/:id", (req, res) => {
   const { id } = req.params;
 
@@ -158,6 +168,24 @@ app.patch("/api/debug/users/:id", (req, res) => {
     changes
   });
 });
+// Dia 5 - Tarea libre 2: Crear una ruta de cambio de contraseña simulada
+app.patch("/api/users/me/password", (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  // Simulación: no devolvemos contraseñas por seguridad
+  res.status(200).json({
+    message: "Solicitud de cambio de contraseña recibida"
+  });
+});
+// Dia 5 - Tarea libre 3: Leer un header personalizado
+app.get("/api/debug/client", (req, res) => {
+  const clientName = req.headers["x-client-name"];
+
+  res.status(200).json({
+    client: clientName
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
