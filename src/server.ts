@@ -13,18 +13,6 @@ type User = {
   updatedAt: string;
 };
 app.use(express.json());
-// Datos temporales en memoria. Más adelante se sustituirán por una base de datos.
-const users: User[] = [
-  {
-    id: 1,
-    name: "Ana García",
-    email: "ana@email.com",
-    role: "USER",
-    isActive: true,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
-];
 
 // Debajo del tipo User, creamos un array llamado users
 
@@ -121,13 +109,27 @@ app.get("/api/users/search", (req, res) => {
     }
   });
 });
-// Dia 4 ,Paso 5: Crear una ruta GET por ID (ruta dinamica)
+// Dia 4: Paso 5: Crear una ruta GET por ID (ruta dinamica)
 app.get("/api/users/:id", (req, res) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
 
-  res.status(200).json({
-    message: "Detalle de usuario",
-    id: id
+  if (Number.isNaN(id)) {
+    return res.status(400).json({
+      error: "El ID debe ser un número"
+    });
+  }
+
+  const user = users.find((user) => user.id === id);
+
+  if (!user) {
+    return res.status(404).json({
+      error: "Usuario no encontrado"
+    });
+  }
+
+  return res.status(200).json({
+    message: "Usuario encontrado",
+    data: user
   });
 });
 // Dia 4:Paso 6: Crear una ruta POST para usuarios
