@@ -79,11 +79,11 @@ app.get("/api/users/:id", (req, res) => {
 
 | Petición | Código esperado | Resultado |
 | --- | ---: | --- |
-| `GET /api/users/1` | 200 | Devuelve el usuario Ana García |
-| `GET /api/users/2` | 200 | Devuelve el usuario Carlos Pérez |
-| `GET /api/users/999` | 404 | Devuelve `Usuario no encontrado` con el ID buscado |
-| `GET /api/users/abc` | 400 | Devuelve `El ID debe ser un número` con el valor recibido |
-| `GET /api/users/active` | 200 | Devuelve solo usuarios con `isActive: true` |
+| GET /api/users/1 | 200 | ![Imagen](./Images/dia8_GET%20api_users1.png) |
+| GET /api/users/2 | 200 | ![Imagen](./Images/dia8_api_users2.png.png) |
+| GET /api/users/999 | 404 | ![Imagen](./Images/dia8_prueba_3.png) |
+| GET /api/users/abc | 400 | ![Imagen](./Images/dia8_api_usersabc.png) |
+
 
 ## Respuesta correcta
 

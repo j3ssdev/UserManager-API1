@@ -134,24 +134,47 @@ app.get("/api/users/:id", (req, res) => {
 });
 // Dia 4:Paso 6: Crear una ruta POST para usuarios
 app.post("/api/users", (req, res) => {
-  const userData = req.body;
-  
-  console.log("Body recibido en POST /api/users:", userData);
+  const { name, email, password } = req.body;
 
-  res.status(201).json({
-    message: "Usuario recibido para crear",
-    data: userData
-  });
-});
-// Paso 7: Crear una ruta PATCH para usuarios
-app.patch("/api/users/:id", (req, res) => {
-  const { id } = req.params;
-  const changes = req.body;
+  if (!name || !email || !password) {
+    return res.status(400).json({
+      error: "name, email y password son obligatorios"
+    });
+  }
 
-  res.status(200).json({
-    message: "Usuario recibido para actualizar",
-    id: id,
-    changes: changes
+  if (password.length < 6) {
+    return res.status(400).json({
+      error: "La contraseña debe tener al menos 6 caracteres"
+    });
+  }
+
+  const existingUser = users.find((user) => user.email === email);
+
+  if (existingUser) {
+    return res.status(409).json({
+      error: "El email ya está registrado"
+    });
+  }
+
+  const newId = users.length > 0
+    ? Math.max(...users.map((user) => user.id)) + 1
+    : 1;
+
+  const newUser: User = {
+    id: newId,
+    name,
+    email,
+    role: "USER",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  users.push(newUser);
+
+  return res.status(201).json({
+    message: "Usuario creado correctamente",
+    data: newUser
   });
 });
 //Paso 8: Crear una ruta DELETE para usuarios
