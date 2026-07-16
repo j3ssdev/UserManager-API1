@@ -3,7 +3,60 @@ import express from "express";
 const app = express();
 const PORT = 3000;
 
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  role: "USER" | "ADMIN";
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
 app.use(express.json());
+// Datos temporales en memoria. Más adelante se sustituirán por una base de datos.
+const users: User[] = [
+  {
+    id: 1,
+    name: "Ana García",
+    email: "ana@email.com",
+    role: "USER",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }
+];
+
+// Debajo del tipo User, creamos un array llamado users
+
+const users: User[] = [
+  {
+    id: 1,
+    name: "Ana García",
+    email: "ana@email.com",
+    role: "USER",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 2,
+    name: "Carlos Pérez",
+    email: "carlos@email.com",
+    role: "ADMIN",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },
+  {
+    id: 3,
+    name: "Laura Martínez",
+    email: "laura@email.com",
+    role: "USER",
+    isActive: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }
+];
 //Tarea libre 1: personalizar el mensaje 
 app.get("/", (req, res) => {
   res.json({
@@ -44,7 +97,8 @@ app.get("/api/ping", (req, res) => {
  app.get("/api/users", (req, res) => {
   res.status(200).json({
     message: "Listado de usuarios",
-    data: []
+    total: users.length,
+    data: users
   });
 });
 // Tarea libre 1: Añadir una ruta para consultar tu propio perfil

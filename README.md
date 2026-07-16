@@ -73,6 +73,24 @@ PATCH /api/debug/users/:id
 
 Más adelante estas rutas podrán eliminarse, ya que no forman parte de la API final.
 
+## Endpoints de usuarios
+
+```http
+GET /api/users
+```
+
+Devuelve el listado de usuarios cargados en memoria.
+
+Respuesta de ejemplo:
+
+```json
+{
+  "message": "Listado de usuarios",
+  "total": 3,
+  "data": []
+}
+```
+
 ## Documentación del reto
 
 - [Día 1 - Diseño inicial](docs/dia-01-diseno-inicial.md)

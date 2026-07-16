@@ -87,6 +87,8 @@ Para que Express pueda interpretar JSON, el servidor debe tener este middleware 
 app.use(express.json());
 ```
 
+![GET localhost](./Images/dia5_Revisar_express_json.jpg)
+
 ## Route params
 
 Los route params son valores que forman parte de la ruta. Sirven para identificar un recurso concreto.
@@ -106,6 +108,7 @@ app.get("/api/debug/params/:id", (req, res) => {
   });
 });
 ```
+
 En Express se leen con:
 
 ```ts
@@ -114,6 +117,7 @@ req.params
 
 Importante: los params llegan como texto.
 Aunque 25 parezca un número, Express lo recibe como "25".
+
 
 ## Query params
 
@@ -172,6 +176,7 @@ GET /api/debug/query
 GET /api/debug/headers
 PATCH /api/debug/users/:id
 ```
+
 ## Ruta combinada
 
 La ruta combinada permite probar params, query params, headers y body en una misma petición.

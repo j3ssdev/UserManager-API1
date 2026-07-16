@@ -122,6 +122,8 @@ Las fechas reales pueden cambiar porque se generan con `new Date().toISOString()
 | `data` es un array | Correcto |
 | Los usuarios no incluyen contraseña | Correcto |
 
+![GET localhost erroneo](./Images/dia7_listadoUsuariosCorrecto.png)
+
 ## Datos sensibles
 
 El listado de usuarios no devuelve campos como:

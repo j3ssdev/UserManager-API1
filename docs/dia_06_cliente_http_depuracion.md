@@ -120,7 +120,7 @@ Prueba libre:
 
 ```http
 POST /api/debug/request
-x-student-name: Jordi
+x-student-name: Jesica
 Content-Type: application/json
 ```
 
@@ -199,10 +199,8 @@ La API devuelve el ID recibido y los cambios enviados:
 
 ## Resumen
 
-En el día 6 no se ha añadido una gran funcionalidad de producto, pero se ha
-trabajado una habilidad fundamental para backend: probar y depurar peticiones
-HTTP de forma ordenada.
+En el día 6 no se ha añadido una gran funcionalidad de producto, pero se ha trabajado una habilidad fundamental para backend:
 
-Antes de construir funcionalidades más complejas conviene saber comprobar qué
-está pasando cuando una petición falla: método, URL, body, headers, status code,
-respuesta y terminal.
+- Probar y depurar peticiones HTTP de forma ordenada.
+
+Antes de construir funcionalidades más complejas conviene saber comprobar qué está pasando cuando una petición falla: método, URL, body, headers, status code, respuesta y terminal.
