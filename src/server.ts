@@ -45,6 +45,14 @@ const users: User[] = [
     updatedAt: new Date().toISOString()
   }
 ];
+
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function isBoolean(value: unknown): value is boolean {
+  return typeof value === "boolean";
+}
 //Tarea libre 1: personalizar el mensaje 
 app.get("/", (req, res) => {
   res.json({
@@ -136,19 +144,41 @@ app.get("/api/users/:id", (req, res) => {
 app.post("/api/users", (req, res) => {
   const { name, email, password } = req.body;
 
-  if (!name || !email || !password) {
+  if (!isNonEmptyString(name)) {
     return res.status(400).json({
-      error: "name, email y password son obligatorios"
+      error: "El nombre debe ser un texto no vacío"
     });
   }
 
-  if (password.length < 6) {
+  if (!isNonEmptyString(email)) {
+    return res.status(400).json({
+      error: "El email debe ser un texto no vacío"
+    });
+  }
+
+  if (!isNonEmptyString(password)) {
+    return res.status(400).json({
+      error: "La contraseña debe ser un texto no vacío"
+    });
+  }
+
+  const cleanName = name.trim();
+  const cleanEmail = email.trim().toLowerCase();
+  const cleanPassword = password.trim();
+
+  if (cleanPassword.length < 6) {
     return res.status(400).json({
       error: "La contraseña debe tener al menos 6 caracteres"
     });
   }
 
-  const existingUser = users.find((user) => user.email === email);
+  if (!cleanEmail.includes("@")) {
+    return res.status(400).json({
+      error: "El email no tiene un formato válido"
+    });
+  }
+
+  const existingUser = users.find((user) => user.email === cleanEmail);
 
   if (existingUser) {
     return res.status(409).json({
@@ -162,8 +192,8 @@ app.post("/api/users", (req, res) => {
 
   const newUser: User = {
     id: newId,
-    name,
-    email,
+    name: cleanName,
+    email: cleanEmail,
     role: "USER",
     isActive: true,
     createdAt: new Date().toISOString(),
@@ -177,6 +207,7 @@ app.post("/api/users", (req, res) => {
     data: newUser
   });
 });
+
 //Dia10: Actualziar datos usuario
 app.patch("/api/users/:id", (req, res) => {
   const idParam = req.params.id;
@@ -205,19 +236,25 @@ app.patch("/api/users/:id", (req, res) => {
   let cleanName: string | undefined;
 
   if (name !== undefined) {
-    cleanName = String(name).trim();
-
-    if (cleanName.length === 0) {
+    if (!isNonEmptyString(name)) {
       return res.status(400).json({
-        error: "El nombre no puede estar vacío"
+        error: "El nombre debe ser un texto no vacío"
       });
     }
+
+    cleanName = name.trim();
   }
 
   let cleanEmail: string | undefined;
 
   if (email !== undefined) {
-    cleanEmail = String(email).trim().toLowerCase();
+    if (!isNonEmptyString(email)) {
+      return res.status(400).json({
+        error: "El email debe ser un texto no vacío"
+      });
+    }
+
+    cleanEmail = email.trim().toLowerCase();
 
     if (!cleanEmail.includes("@")) {
       return res.status(400).json({
@@ -236,7 +273,7 @@ app.patch("/api/users/:id", (req, res) => {
     }
   }
 
-  if (isActive !== undefined && typeof isActive !== "boolean") {
+    if (isActive !== undefined && !isBoolean(isActive)) {
     return res.status(400).json({
       error: "isActive debe ser true o false"
     });
