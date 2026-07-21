@@ -147,7 +147,7 @@ ordenadas para poder ejecutarlas de arriba abajo.
 | Crear usuario con email sin @ | 400 | ![Imagen](./Images/dia13_prueba3.png) |
 | Crear usuario con email sin punto | 400 | ![Imagen](./Images/dia11_prueba4.png) |
 | Actualizar usuario con su mismo email | 200 | ![Imagen](./Images/dia13_prueba5.png) |
-| Actualizar usuario con email de otro usuario | 409 | ![Imagen](./images/dia13_prueba6.png) |
+| Actualizar usuario con email de otro usuario | 409 | ![Imagen](./Images/dia13_prueba6.png) |
 
 Como los usuarios viven en memoria, es recomendable reiniciar el servidor
 antes de ejecutar la secuencia completa.
