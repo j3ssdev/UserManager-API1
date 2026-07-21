@@ -90,6 +90,7 @@ Respuesta de ejemplo:
   "data": []
 }
 ```
+
 ## Endpoints de usuarios
 
 ```http
@@ -129,6 +130,7 @@ Posibles errores:
   "error": "Usuario no encontrado"
 }
 ```
+
 ## Crear usuario
 
 ```http
@@ -179,8 +181,115 @@ Posibles errores:
   "error": "El email ya está registrado"
 }
 ```
+## Actualizar usuario
 
-## Documentación del reto
+```http
+PATCH /api/users/:id
+```
+
+Permite modificar parcialmente los datos de un usuario.
+
+Campos permitidos:
+
+```text
+name
+email
+isActive
+```
+
+Body de ejemplo:
+
+```json
+{
+  "name": "Ana Martínez"
+}
+```
+
+Respuesta correcta:
+
+```json
+{
+  "message": "Usuario actualizado correctamente",
+  "data": {
+    "id": 1,
+    "name": "Ana Martínez",
+    "email": "ana@email.com",
+    "role": "USER",
+    "isActive": true
+  }
+}
+```
+
+Posibles errores:
+
+```json
+{
+  "error": "El ID debe ser un número",
+  "received": "abc"
+}
+```
+
+```json
+{
+  "error": "Usuario no encontrado",
+  "id": 999
+}
+```
+
+```json
+{
+  "error": "Debes enviar al menos un campo para actualizar"
+}
+```
+
+```json
+{
+  "error": "El email ya está registrado"
+}
+```
+## Eliminar o desactivar usuario
+
+```http
+DELETE /api/users/:id
+```
+
+En este proyecto, esta ruta no borra físicamente el usuario. Realiza un borrado
+lógico marcando:
+
+```text
+isActive = false
+```
+
+Respuesta correcta:
+
+```json
+{
+  "message": "Usuario desactivado correctamente",
+  "data": {
+    "id": 1,
+    "name": "Ana García",
+    "email": "ana@email.com",
+    "role": "USER",
+    "isActive": false
+  }
+}
+```
+
+Posibles errores:
+
+```json
+{
+  "error": "El ID debe ser un número",
+  "received": "abc"
+}
+```
+
+```json
+{
+  "error": "Usuario no encontrado",
+  "id": 999
+}
+```
 
 ## Documentación del reto
 
@@ -193,3 +302,4 @@ Posibles errores:
 - [Día 7 - Listado de usuarios en memoria](docs/dia-07-listado-usuarios.md)
 - [Día 8 - Consultar usuario por ID](docs/dia-08-consultar-usuario-id.md)
 - [Día 9 - Crear usuarios en memoria](docs/dia-09-crear-usuarios.md)
+- [Día 10 - Actualizar usuarios en memoria](docs/dia-10-actualizar-usuarios.md)

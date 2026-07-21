@@ -206,11 +206,11 @@ realiza la actualización.
 | Actualización correcta | 200 | ![Imagen](./Images/Dia10_prueba1.png) |
 | ID no válido | 400 | ![Imagen](./Images/dia10_prueba2.png) |
 | Usuario inexistente | 404 | ![Imagen](./Images/dia10_prueba3.png) |
-| Body vacío | 400 | ![Imagen](./Images/) |
-| Nombre vacío | 400 | ![Imagen](./images/) |
-| Email inválido | 400 | ![Imagen](./images/) |
-| Email duplicado | 409 | ![Imagen](./images/) |
-| isActive incorrecto | 400 | ![Imagen](./images/) |
+| Body vacío | 400 | ![Imagen](./Images/dia10_prueba4.png) |
+| Nombre vacío | 400 | ![Imagen](./Images/dia10_prueba5.png) |
+| Email inválido | 400 | ![Imagen](./Images/dia10_prueba6.png) |
+| Email duplicado | 409 | ![Imagen](./Images/dia10_prueba7.png) |
+| isActive incorrecto | 400 | ![Imagen](./Images/dia10_prueba8.png) |
 
 ## Errores controlados
 
