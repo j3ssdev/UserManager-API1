@@ -417,3 +417,4 @@ Respuesta:
 - [Día 12 - Validación manual básica](docs/dia-12-validacion-manual-basica.md)
 - [Día 13 - Validación de email y duplicados](docs/dia-13-validacion-email-duplicados.md)
 - [Día 14 - Códigos de estado HTTP](docs/dia-14-codigos-estado-http.md)
+- [Día 15 - Middleware centralizado de errores](docs/dia-15-middleware-errores.md)
