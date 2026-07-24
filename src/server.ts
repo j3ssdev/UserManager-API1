@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 
 const app = express();
 const PORT = 3000;
@@ -12,7 +12,16 @@ type User = {
     createdAt: string;
     updatedAt: string;
 };
+class AppError extends Error {
+  statusCode: number;
+  details?: unknown;
 
+  constructor(message: string, statusCode: number = 500, details?: unknown) {
+    super(message);
+    this.statusCode = statusCode;
+    this.details = details;
+  }
+}
 
 // Datos temporales en memoria. Más adelante se sustituirán por una base de datos.
 const users: User[] = [
@@ -68,6 +77,31 @@ function isEmailTaken(email: string, userIdToIgnore?: number): boolean {
         (user) => user.email === normalizedEmail && user.id !== userIdToIgnore
     );
 }
+function notFoundMiddleware(req: Request, res: Response, next: NextFunction) {
+  next(
+    new AppError("Ruta no encontrada", 404, {
+      method: req.method,
+      path: req.originalUrl
+    })
+  );
+}
+function errorMiddleware(
+  err: AppError,
+  req: Request,
+  res: Response,
+  _next: NextFunction
+) {
+  const statusCode = err.statusCode || 500;
+
+  return res.status(statusCode).json({
+    error: err.message || "Error interno del servidor",
+    statusCode,
+    details: err.details,
+    path: req.originalUrl,
+    method: req.method,
+    timestamp: new Date().toISOString()
+  });
+}
 
 app.use(express.json());
 
@@ -106,6 +140,10 @@ app.get("/api/ping", (req, res) => {
     res.json({
         message: "Pong"
     });
+});
+
+app.get("/api/debug/error", (req, res, next) => {
+  next(new AppError("Error de prueba interno", 500));
 });
 
 //Dia 4: GET Users
@@ -184,29 +222,33 @@ app.post("/api/users", (req, res) => {
 });
 
 //Dia 7: GET Users
-app.get("/api/users/:id", (req, res) => {
-    const id = Number(req.params.id);
+app.get("/api/users/:id", (req, res, next) => {
+  const idParam = req.params.id;
+  const id = Number(idParam);
 
-    if (Number.isNaN(id)) {
-        return res.status(400).json({
-        error: "El ID debe ser un número"
-        });
-    }
+  if (Number.isNaN(id)) {
+    return next(
+      new AppError("El ID debe ser un número", 400, {
+        received: idParam
+      })
+    );
+  }
 
-    const user = users.find((user) => user.id === id);
+  const user = users.find((user) => user.id === id);
 
-    if (!user) {
-        return res.status(404).json({
-        error: "Usuario no encontrado"
-        });
-    }
+  if (!user) {
+    return next(
+      new AppError("Usuario no encontrado", 404, {
+        id
+      })
+    );
+  }
 
-    return res.status(200).json({
-        message: "Usuario encontrado",
-        data: user
-    });
+  return res.status(200).json({
+    message: "Usuario encontrado",
+    data: user
+  });
 });
-
 //Dia 10: PATCH Users
 app.patch("/api/users/:id", (req, res) => {
     const idParam = req.params.id;
@@ -456,7 +498,8 @@ app.get("/api/debug/client", (req, res) => {
     });
 });
 
-
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
