@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
+import { prisma } from "./prisma";
 
 const app = express();
 const PORT = 3000;
@@ -12,6 +13,15 @@ type User = {
     createdAt: string;
     updatedAt: string;
 };
+const userSafeSelect = {
+  id: true,
+  name: true,
+  email: true,
+  role: true,
+  isActive: true,
+  createdAt: true,
+  updatedAt: true
+} as const;
 class AppError extends Error {
   statusCode: number;
   details?: unknown;
@@ -53,6 +63,15 @@ const users: User[] = [
         updatedAt: new Date().toISOString()
     }
 ];
+
+function isPrismaUniqueError(error: unknown) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: string }).code === "P2002"
+  );
+}
 
 function isNonEmptyString(value: unknown): value is string {
     return typeof value === "string" && value.trim().length > 0;
@@ -104,7 +123,131 @@ function errorMiddleware(
 }
 
 app.use(express.json());
+app.get("/api/debug/prisma/users", async (req, res, next) => {
+  try {
+    const users = await prisma.user.findMany({
+      select: userSafeSelect,
+      orderBy: {
+        id: "asc"
+      }
+    });
 
+    return res.status(200).json({
+      message: "Usuarios obtenidos con Prisma",
+      total: users.length,
+      data: users
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+app.get("/api/debug/prisma/users-active", async (req, res, next) => {
+  try {
+    const users = await prisma.user.findMany({
+      where: {
+        isActive: true
+      },
+      select: userSafeSelect,
+      orderBy: {
+        id: "asc"
+      }
+    });
+
+    return res.status(200).json({
+      message: "Usuarios activos obtenidos con Prisma",
+      total: users.length,
+      data: users
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+app.get("/api/debug/prisma/users/:id", async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
+
+    if (Number.isNaN(id)) {
+      return res.status(400).json({
+        error: "El ID debe ser un número"
+      });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id
+      },
+      select: userSafeSelect
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        error: "Usuario no encontrado"
+      });
+    }
+
+    return res.status(200).json({
+      message: "Usuario encontrado con Prisma",
+      data: user
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+app.post("/api/debug/prisma/users", async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        error: "name, email y password son obligatorios"
+      });
+    }
+
+    const cleanName = String(name).trim();
+    const cleanEmail = String(email).trim().toLowerCase();
+    const cleanPassword = String(password).trim();
+
+    if (cleanName.length === 0) {
+      return res.status(400).json({
+        error: "El nombre no puede estar vacío"
+      });
+    }
+
+    if (!cleanEmail.includes("@") || !cleanEmail.includes(".")) {
+      return res.status(400).json({
+        error: "El email no tiene un formato válido"
+      });
+    }
+
+    if (cleanPassword.length < 6) {
+      return res.status(400).json({
+        error: "La contraseña debe tener al menos 6 caracteres"
+      });
+    }
+
+    const createdUser = await prisma.user.create({
+      data: {
+        name: cleanName,
+        email: cleanEmail,
+        passwordHash: `hash_temporal_${cleanPassword}`
+      },
+      select: userSafeSelect
+    });
+
+    return res.status(201).json({
+      message: "Usuario creado con Prisma",
+      data: createdUser
+    });
+  } catch (error) {
+    if (isPrismaUniqueError(error)) {
+      return res.status(409).json({
+        error: "El email ya está registrado"
+      });
+    }
+
+    next(error);
+  }
+});
 // --- Tarea libre 1: Personalizar el mensaje inicial ---
 app.get("/", (req, res) => {
     res.json({

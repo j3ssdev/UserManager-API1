@@ -65,3 +65,10 @@ flowchart LR
 ```
 El archivo seed.ts usa Prisma Client para insertar usuarios iniciales en PostgreSQL. Después podemos comprobarlos con Prisma Studio.
 
+Creación de seed:
+
+![Imagen](./images/dia24_1.png) 
+
+Comprobación de seed en prisma y postgres:
+
+![Imagen](./images/dia24_2png.png) 

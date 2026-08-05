@@ -683,6 +683,37 @@ Nota:
 ```text
 Los passwordHash son temporales hasta implementar bcrypt en la fase de seguridad.
 ```
+## Consultas básicas con Prisma
+
+La API ya puede consultar usuarios desde PostgreSQL usando Prisma Client.
+
+Archivo de cliente compartido:
+
+```text
+src/prisma.ts
+```
+
+Este proyecto usa Prisma 7 con adapter PostgreSQL:
+
+```ts
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "./generated/prisma/client";
+```
+
+Rutas temporales de prueba:
+
+| Método | Ruta | Acción |
+| --- | --- |---|
+| GET | `/api/debug/prisma/users` | Listar usuarios |
+| GET | `/api/debug/prisma/users-active` | Listar usuarios activos |
+| GET | `/api/debug/prisma/users/:id` | Buscar usuario por ID |
+| POST | `/api/debug/prisma/users` | Crear usuario |
+
+Regla:
+
+```text
+Las respuestas no deben incluir passwordHash.
+```
 
 ## Documentación del reto
 
