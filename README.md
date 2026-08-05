@@ -714,6 +714,7 @@ Regla:
 ```text
 Las respuestas no deben incluir passwordHash.
 ```
+
 ## Separación de rutas
 
 El proyecto empieza a organizarse por capas.
