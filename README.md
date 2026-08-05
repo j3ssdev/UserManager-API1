@@ -714,6 +714,31 @@ Regla:
 ```text
 Las respuestas no deben incluir passwordHash.
 ```
+## Separación de rutas
+
+El proyecto empieza a organizarse por capas.
+
+Primera carpeta creada:
+
+```text
+src/routes/
+```
+
+Archivos actuales:
+
+```text
+src/routes/health.routes.ts
+src/routes/debug-prisma.routes.ts
+```
+
+server.ts monta los routers:
+
+```ts
+app.use("/api/health", healthRouter);
+app.use("/api/debug/prisma", debugPrismaRouter);
+```
+
+Esta separación permite que server.ts quede más limpio y que el proyecto pueda crecer hacia una arquitectura con controladores, servicios y repositorios.
 
 ## Documentación del reto
 
@@ -741,3 +766,5 @@ Las respuestas no deben incluir passwordHash.
 - [Día 22 - Primera migración con Prisma](docs/dia-22-primera-migracion-prisma.md)
 - [Día 23 - Prisma Studio](docs/dia-23-prisma-studio.md)
 - [Día 24 - Seed de datos iniciales](docs/dia-24-seed-datos-iniciales.md)
+- [Día 25 - Consultas básicas con Prisma Client](docs/dia-25-consultas-basicas-prisma.md)
+- [Día 26 - Separar rutas](docs/dia-26-separar-rutas.md)
