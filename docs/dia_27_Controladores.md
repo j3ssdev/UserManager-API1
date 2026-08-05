@@ -77,6 +77,6 @@ flowchart TD
     route --> controller
     controller --> prisma
     prisma --> db
-    ```
-    En este día el controlador todavía usa Prisma directamente. En los próximos días se añadirá una capa de servicio y una capa de repositorio para separar mejor las responsabilidades.
-    
+```
+
+En este día el controlador todavía usa Prisma directamente. En los próximos días se añadirá una capa de servicio y una capa de repositorio para separar mejor las responsabilidades.
