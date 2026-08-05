@@ -44,6 +44,7 @@ src/
 Separar rutas permite que server.ts no tenga toda la lógica de la API. A partir de ahora, server.ts se encarga de configurar la aplicación y montar routers, mientras que los archivos de routes agrupan endpoints relacionados.
 
 ## Diagrama
+
 ```mermaid
 flowchart TD
     server["server.ts"]
@@ -65,4 +66,5 @@ flowchart TD
     debug --> get_user_id
     debug --> post_users
 ```
+
 server.ts ya no define todas las rutas directamente. Ahora monta routers separados, y cada router agrupa rutas relacionadas.
