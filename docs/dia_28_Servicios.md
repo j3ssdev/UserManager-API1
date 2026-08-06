@@ -84,4 +84,5 @@ En este día el servicio todavía usa Prisma directamente. En el próximo paso s
 | Route | Define URL y método HTTP |
 | Controller | Lee req, llama al servicio y responde |
 | Service | Aplica reglas de negocio |
-| Prisma | Accede temporalmente a PostgreSQL |
+| Prisma | Accede temporalmente a PostgreSQ |
+
