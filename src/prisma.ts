@@ -5,11 +5,11 @@ import { PrismaClient } from "./generated/prisma/client/client";
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
-  throw new Error("DATABASE_URL no está configurada");
+    throw new Error("DATABASE_URL no está configurada");
 }
 
 const adapter = new PrismaPg({
-  connectionString
+    connectionString
 });
 
 export const prisma = new PrismaClient({ adapter });

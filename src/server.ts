@@ -6,9 +6,7 @@ import { debugPrismaRouter } from "./routes/debug-prisma.routes";
 const app = express();
 const PORT = 3000;
 
-// --- dia26 Rutas ---
-app.use("/api/health", healthRouter);
-app.use("/api/debug/prisma", debugPrismaRouter);
+app.use(express.json());
 
 type User = {
     id: number;
@@ -19,16 +17,7 @@ type User = {
     createdAt: string;
     updatedAt: string;
 };
-class AppError extends Error {
-  statusCode: number;
-  details?: unknown;
 
-  constructor(message: string, statusCode: number = 500, details?: unknown) {
-    super(message);
-    this.statusCode = statusCode;
-    this.details = details;
-  }
-}
 
 // Datos temporales en memoria. Más adelante se sustituirán por una base de datos.
 const users: User[] = [
@@ -61,13 +50,15 @@ const users: User[] = [
     }
 ];
 
-function isPrismaUniqueError(error: unknown) {
-  return (
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error as { code?: string }).code === "P2002"
-  );
+class AppError extends Error {
+    statusCode: number;
+    details?: unknown;
+
+    constructor(message: string, statusCode: number = 500, details?: unknown) {
+        super(message);
+        this.statusCode = statusCode;
+        this.details = details;
+    }
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -93,33 +84,55 @@ function isEmailTaken(email: string, userIdToIgnore?: number): boolean {
         (user) => user.email === normalizedEmail && user.id !== userIdToIgnore
     );
 }
+
 function notFoundMiddleware(req: Request, res: Response, next: NextFunction) {
-  next(
-    new AppError("Ruta no encontrada", 404, {
-      method: req.method,
-      path: req.originalUrl
-    })
-  );
+    next(
+        new AppError("Ruta no encontrada", 404, {
+            method: req.method,
+            path: req.originalUrl
+        })
+    );
 }
+
 function errorMiddleware(
-  err: AppError,
-  req: Request,
-  res: Response,
-  _next: NextFunction
-) {
-  const statusCode = err.statusCode || 500;
+    err: AppError,
+    req: Request,
+    res: Response,
+    _next: NextFunction
+    ) {
+    const statusCode = err.statusCode || 500;
 
-  return res.status(statusCode).json({
-    error: err.message || "Error interno del servidor",
-    statusCode,
-    details: err.details,
-    path: req.originalUrl,
-    method: req.method,
-    timestamp: new Date().toISOString()
-  });
+    return res.status(statusCode).json({
+        error: err.message || "Error interno del servidor",
+        statusCode,
+        details: err.details,
+        path: req.originalUrl,
+        method: req.method,
+        timestamp: new Date().toISOString()
+    });
 }
 
-app.use(express.json());
+function isPrismaUniqueError(error: unknown) {
+    return (
+        typeof error === "object" &&
+        error !== null &&
+        "code" in error &&
+        (error as { code?: string }).code === "P2002"
+    );
+}
+
+//------------Routes
+
+//Dia 26: /api/health
+app.use("/api/health", healthRouter);
+
+//Dia 26: /api/debug/prisma
+app.use("/api/debug/prisma", debugPrismaRouter);
+
+
+
+
+//------------Codigo anterior
 
 // --- Tarea libre 1: Personalizar el mensaje inicial ---
 app.get("/", (req, res) => {
@@ -152,7 +165,7 @@ app.get("/api/ping", (req, res) => {
 });
 
 app.get("/api/debug/error", (req, res, next) => {
-  next(new AppError("Error de prueba interno", 500));
+    next(new AppError("Error de prueba interno", 500));
 });
 
 //Dia 4: GET Users
@@ -232,32 +245,33 @@ app.post("/api/users", (req, res) => {
 
 //Dia 7: GET Users
 app.get("/api/users/:id", (req, res, next) => {
-  const idParam = req.params.id;
-  const id = Number(idParam);
+    const idParam = req.params.id;
+    const id = Number(idParam);
 
-  if (Number.isNaN(id)) {
-    return next(
-      new AppError("El ID debe ser un número", 400, {
-        received: idParam
-      })
-    );
-  }
+    if (Number.isNaN(id)) {
+        return next(
+            new AppError("El ID debe ser un número", 400, {
+                received: idParam
+            })
+        );
+    }
 
-  const user = users.find((user) => user.id === id);
+    const user = users.find((user) => user.id === id);
 
-  if (!user) {
-    return next(
-      new AppError("Usuario no encontrado", 404, {
-        id
-      })
-    );
-  }
+    if (!user) {
+        return next(
+            new AppError("Usuario no encontrado", 404, {
+                id
+            })
+        );
+    }
 
-  return res.status(200).json({
-    message: "Usuario encontrado",
-    data: user
-  });
+    return res.status(200).json({
+        message: "Usuario encontrado",
+        data: user
+    });
 });
+
 //Dia 10: PATCH Users
 app.patch("/api/users/:id", (req, res) => {
     const idParam = req.params.id;
@@ -506,6 +520,7 @@ app.get("/api/debug/client", (req, res) => {
         client: clientHeader
     });
 });
+
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
