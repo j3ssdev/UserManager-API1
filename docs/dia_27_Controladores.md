@@ -36,12 +36,12 @@ src/
 ## Controladores creados
 
 | Controlador | Función | Resultado esperado |
-| --- | --- |
-| `getHealth` | Devuelve el estado de la API | ![Imagen](./Images/dia27_prueba1.png)|
-| `getUsers` | Lista usuarios | ![Imagen](./Images/dia27_prueba2.png)|
-| `getActiveUsers` | Lista usuarios activos | ![Imagen](./Images/dia27_prueba3.png)|
-| `getUserById` | Busca un usuario por ID | ![Imagen](./Images/dia27_prueba4.png)|
-| `createDebugUser` | Crea un usuario temporal con Prisma | ![Imagen](./Images/dia27_prueba5.png)|
+| --- | --- | --- |  
+| `getHealth` | Devuelve el estado de la API | ![Imagen](./Images/dia27_prueba1.png) |
+| `getUsers` | Lista usuarios | ![Imagen](./Images/dia27_prueba2.png) |
+| `getActiveUsers` | Lista usuarios activos | ![Imagen](./Images/dia27_prueba3.png) |
+| `getUserById` | Busca un usuario por ID | ![Imagen](./Images/dia27_prueba4.png) |
+| `createDebugUser` | Crea un usuario temporal con Prisma | ![Imagen](./Images/dia27_prueba5.png) |
 
 ## Antes y después
 
