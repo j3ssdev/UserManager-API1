@@ -45,14 +45,14 @@ src/
 
 | Función | Responsabilidad | Captura |
 | --- | --- | --- |
-| `findAllUsers` | Obtener todos los usuarios | ![Imagen](./images/dia29_prueba1.png) |
-| `findActiveUsers` | Obtener usuarios activos | ![Imagen](./images/dia29_prueba2.png) |
-| `findUserById` | Buscar usuario por ID | 200 OK: ![Imagen](./images/dia29_prueba3.png) 404 Not Found: ![Imagen](./images/dia29_prueba4.png) 400 Bad Request: ![Imagen](./images/dia29_prueba5.png) |
+| `findAllUsers` | Obtener todos los usuarios | ![Imagen](./Images/dia29_prueba1.png) |
+| `findActiveUsers` | Obtener usuarios activos | ![Imagen](./Images/dia29_prueba2.png) |
+| `findUserById` | Buscar usuario por ID | 200 OK: ![Imagen](./Images/dia29_prueba3.png) 404 Not Found: ![Imagen](./Images/dia29_prueba4.png) 400 Bad Request: ![Imagen](./Images/dia29_prueba5.png) |
 | `findUserByEmail` | Buscar usuario por email |
-| `createUser` | Crear usuario | 201 Created: ![Imagen](./images/dia29_CrearUsuario.png) EMAIL REPETIDO: ![Imagen](./images/dia29_mismoEmail.png) |
+| `createUser` | Crear usuario | 201 Created: ![Imagen](./Images/dia29_CrearUsuario.png) EMAIL REPETIDO: ![Imagen](./Images/dia29_mismoEmail.png) |
 
 Comprobación en Prisma y Posgres:
-![Imagen](./images/dia29_Prisma.png) 
+![Imagen](./Images/dia29_Prisma.png)
 
 ## Flujo actual
 
