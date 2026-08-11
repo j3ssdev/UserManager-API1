@@ -1,15 +1,12 @@
-import { prisma } from "../prisma";
-import { AppError } from "../errors/AppError";
+import {
+  createUser,
+  findActiveUsers,
+  findAllUsers,
+  findUserByEmail,
+  findUserById
+} from "../repositories/user.repository";
 
-const userSafeSelect = {
-  id: true,
-  name: true,
-  email: true,
-  role: true,
-  isActive: true,
-  createdAt: true,
-  updatedAt: true
-} as const;
+import { AppError } from "../errors/AppError";
 
 type CreateDebugUserInput = {
   name: unknown;
@@ -30,33 +27,15 @@ function isValidBasicEmail(email: string): boolean {
 }
 
 export async function getUsersService() {
-  return prisma.user.findMany({
-    select: userSafeSelect,
-    orderBy: {
-      id: "asc"
-    }
-  });
+  return findAllUsers();
 }
 
 export async function getActiveUsersService() {
-  return prisma.user.findMany({
-    where: {
-      isActive: true
-    },
-    select: userSafeSelect,
-    orderBy: {
-      id: "asc"
-    }
-  });
+  return findActiveUsers();
 }
 
 export async function getUserByIdService(id: number) {
-  const user = await prisma.user.findUnique({
-    where: {
-      id
-    },
-    select: userSafeSelect
-  });
+  const user = await findUserById(id);
 
   if (!user) {
     throw new AppError("Usuario no encontrado", 404, { id });
@@ -92,22 +71,17 @@ export async function createDebugUserService(input: CreateDebugUserInput) {
     throw new AppError("La contraseña debe tener al menos 6 caracteres", 400);
   }
 
-  try {
-    return await prisma.user.create({
-      data: {
-        name: cleanName,
-        email: cleanEmail,
-        passwordHash: `hash_temporal_${cleanPassword}`
-      },
-      select: userSafeSelect
-    });
-  } catch (error: any) {
-    if (error.code === "P2002") {
-      throw new AppError("El email ya está registrado", 409, {
-        email: cleanEmail
-      });
-    }
+  const existingUser = await findUserByEmail(cleanEmail);
 
-    throw error;
+  if (existingUser) {
+    throw new AppError("El email ya está registrado", 409, {
+      email: cleanEmail
+    });
   }
+
+  return createUser({
+    name: cleanName,
+    email: cleanEmail,
+    passwordHash: `hash_temporal_${cleanPassword}`
+  });
 }

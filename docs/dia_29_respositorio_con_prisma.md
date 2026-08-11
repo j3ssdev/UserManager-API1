@@ -43,13 +43,16 @@ src/
 
 ## Funciones del repositorio
 
-| Función | Responsabilidad |
-| --- | --- |
-| `findAllUsers` | Obtener todos los usuarios |
-| `findActiveUsers` | Obtener usuarios activos |
-| `findUserById` | Buscar usuario por ID |
+| Función | Responsabilidad | Captura |
+| --- | --- | --- |
+| `findAllUsers` | Obtener todos los usuarios | ![Imagen](./images/dia29_prueba1.png) |
+| `findActiveUsers` | Obtener usuarios activos | ![Imagen](./images/dia29_prueba2.png) |
+| `findUserById` | Buscar usuario por ID | 200 OK: ![Imagen](./images/dia29_prueba3.png) 404 Not Found: ![Imagen](./images/dia29_prueba4.png) 400 Bad Request: ![Imagen](./images/dia29_prueba5.png) |
 | `findUserByEmail` | Buscar usuario por email |
-| `createUser` | Crear usuario |
+| `createUser` | Crear usuario | 201 Created: ![Imagen](./images/dia29_CrearUsuario.png) EMAIL REPETIDO: ![Imagen](./images/dia29_mismoEmail.png) |
+
+Comprobación en Prisma y Posgres:
+![Imagen](./images/dia29_Prisma.png) 
 
 ## Flujo actual
 
@@ -61,7 +64,18 @@ Route → Controller → Service → Repository → Prisma → PostgreSQL
 
 El repositorio se encarga del acceso a datos. El servicio ya no usa Prisma directamente, sino que llama a funciones del repositorio. Esto permite separar mejor las reglas de negocio del acceso a la base de datos.
 
-## Diagrama
+## Explicación personal
+
+El repositorio se encarga del acceso a datos. El servicio ya no usa Prisma directamente, sino que llama a funciones del repositorio. Esto permite separar mejor las reglas de negocio del acceso a la base de datos.
+
+```mermaid
+flowchart LR
+    A["Route"] --> B["Controller"]
+    B --> C["Service"]
+    C --> D["Repository"]
+    D --> E["Prisma Client"]
+    E --> F["PostgreSQL"]
+```
 
 El repositorio es la capa que usa Prisma Client. El servicio deja de conocer los detalles concretos de acceso a base de datos.
 
