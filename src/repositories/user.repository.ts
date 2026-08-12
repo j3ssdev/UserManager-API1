@@ -19,6 +19,12 @@ type CreateUserData = {
   isActive?: boolean;
 };
 
+type UpdateUserData = {
+  name?: string;
+  email?: string;
+  isActive?: boolean;
+}
+
 export function findAllUsers() {
   return prisma.user.findMany({
     select: userSafeSelect,
@@ -61,6 +67,27 @@ export function findUserByEmail(email: string) {
 export function createUser(data: CreateUserData) {
   return prisma.user.create({
     data,
+    select: userSafeSelect
+  });
+}
+
+export function updateUser(id: number, data: UpdateUserData) {
+  return prisma.user.update({
+    where: {
+      id
+    },
+    data,
+    select: userSafeSelect
+  });
+}
+export function deactivateUser(id: number) {
+  return prisma.user.update({
+    where: {
+      id
+    },
+    data: {
+      isActive: false
+    },
     select: userSafeSelect
   });
 }
