@@ -20,13 +20,16 @@
 
 ## Rutas reales creadas
 
-| Método | Ruta | Acción |
-| --- | --- |---|
-| GET | `/api/users` | Listar usuarios |
-| GET | `/api/users/:id` | Consultar usuario |
-| POST | `/api/users` | Crear usuario |
-| PATCH | `/api/users/:id` | Actualizar usuario |
-| DELETE | `/api/users/:id` | Desactivar usuario |
+| Método | Ruta | Acción | Captura |
+| --- | --- | --- | --- |
+| GET | `/api/users` | Listar usuarios | ![Imagen](./Images/dia30_ListarUsuarios.png) |
+| GET | `/api/users/:id` | Consultar usuario | 200 OK: ![Imagen](./Images/dia30_prueba2_consulta_id.png) 404 Not|
+| POST | `/api/users` | Crear usuario | ![Imagen](./Images/dia30_crear_usuario.png) |
+| PATCH | `/api/users/:id` | Actualizar usuario | correcto: ![Imagen](./Images/dia30_prueba4_probar_actualizar.png.png) actualizacion sin campos: ![Imagen](./Images/dia30_prueba5_sin_campos.png.png) email duplicado en actualizacion: ![Imagen](./Images/dia30_prueba6_%20email_duplicado.png.png) |
+| DELETE | `/api/users/:id` | Desactivar usuario | Correcto: ![Imagen](./Images/dia30_prueba7_probar_desactivacion.png.png) Borrado duplicado: ![Imagen](./Images/dia30_prueba8_comprobacion_desactivacion..png) |
+
+Comprobación en Prisma y Posgres:
+![Imagen](./Images/dia30_final_prisma.png)
 
 ## Flujo actual
 

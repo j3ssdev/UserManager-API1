@@ -8,7 +8,7 @@ const userSafeSelect = {
   role: true,
   isActive: true,
   createdAt: true,
-  updatedAt: true
+  updatedAt: true,
 } as const;
 
 type CreateUserData = {
@@ -23,72 +23,74 @@ type UpdateUserData = {
   name?: string;
   email?: string;
   isActive?: boolean;
-}
+};
 
 export function findAllUsers() {
   return prisma.user.findMany({
     select: userSafeSelect,
     orderBy: {
-      id: "asc"
-    }
+      id: "asc",
+    },
   });
 }
 
+// FIX: Función que te faltaba
 export function findActiveUsers() {
   return prisma.user.findMany({
     where: {
-      isActive: true
+      isActive: true,
     },
     select: userSafeSelect,
     orderBy: {
-      id: "asc"
-    }
+      id: "asc",
+    },
   });
 }
 
 export function findUserById(id: number) {
   return prisma.user.findUnique({
     where: {
-      id
+      id,
     },
-    select: userSafeSelect
+    select: userSafeSelect,
   });
 }
 
 export function findUserByEmail(email: string) {
   return prisma.user.findUnique({
     where: {
-      email
+      email,
     },
-    select: userSafeSelect
+    select: userSafeSelect,
   });
 }
 
 export function createUser(data: CreateUserData) {
   return prisma.user.create({
     data,
-    select: userSafeSelect
+    select: userSafeSelect,
   });
 }
 
 export function updateUser(id: number, data: UpdateUserData) {
   return prisma.user.update({
     where: {
-      id
+      id,
     },
     data,
-    select: userSafeSelect
+    select: userSafeSelect,
   });
 }
+
 export function deactivateUser(id: number) {
   return prisma.user.update({
     where: {
-      id
+      id,
     },
     data: {
-      isActive: false
+      isActive: false,
     },
-    select: userSafeSelect
+    select: userSafeSelect,
   });
 }
 
