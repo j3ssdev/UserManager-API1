@@ -14,6 +14,8 @@ import {
   normalizeEmail,
 } from "../utils/string.utils";
 
+import { hashPassword } from "../utils/password.utils";
+
 // Types
 type CreateUserInput = {
   name: unknown;
@@ -77,12 +79,13 @@ export async function createUserService(input: CreateUserInput) {
       email: cleanEmail,
     });
   }
-
+  const passwordHash = await hashPassword(cleanPassword);
+  
   return createUser({
-    name: cleanName,
-    email: cleanEmail,
-    passwordHash: `hash_temporal_${cleanPassword}`,
-  });
+  name: cleanName,
+  email: cleanEmail,
+  passwordHash
+});
 }
 
 export async function updateUserService(id: number, input: UpdateUserInput) {

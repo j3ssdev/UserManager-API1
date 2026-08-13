@@ -906,6 +906,37 @@ Rutas principales:
 | PATCH | `/api/users/:id` | Actualizar usuario |
 | DELETE | `/api/users/:id` | Desactivar usuario |
 
+## Seguridad de contraseñas
+
+El proyecto usa `bcrypt` para hashear contraseñas antes de guardarlas en la base de datos.
+
+Instalación:
+
+```bash
+npm install bcrypt
+npm install -D @types/bcrypt
+```
+
+Utilidades principales:
+
+```text
+src/utils/password.utils.ts
+```
+
+Funciones:
+
+```ts
+hashPassword(password)
+comparePassword(password, passwordHash)
+```
+
+Reglas:
+
+- La API recibe `password`.
+- La base de datos guarda `passwordHash`.
+- La contraseña en texto plano nunca se guarda.
+- `passwordHash` nunca se devuelve al cliente.
+
 ## Documentación del reto
 
 - [Día 1 - Diseño inicial](docs/dia-01-diseno-inicial.md)
@@ -939,3 +970,4 @@ Rutas principales:
 - [Día 29 - Repositorio con Prisma](docs/dia-29-repositorio-prisma.md)
 - [Día 30 - CRUD persistente ordenado](docs/dia-30-crud-persistente-ordenado.md)
 - [Día 31 - Limpieza y refactor](docs/dia-31-limpieza-refactor.md)
+- [Día 32 - Contraseñas seguras con bcrypt](docs/dia-32-bcrypt-passwords.md)
