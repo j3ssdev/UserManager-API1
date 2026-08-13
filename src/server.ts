@@ -1,13 +1,14 @@
 import express, { Request, Response, NextFunction } from "express";
 import { healthRouter } from "./routes/health.routes";
 import { userRouter } from "./routes/user.routes";
+import { authRouter } from "./routes/auth.routes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Configuración general y middlewares globales
 app.use(express.json());
-
+app.use("/api/auth", authRouter);
 // Clase personalizada para errores de la aplicación
 export class AppError extends Error {
   statusCode: number;

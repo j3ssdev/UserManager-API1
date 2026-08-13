@@ -181,6 +181,7 @@ Posibles errores:
   "error": "El email ya está registrado"
 }
 ```
+
 ## Actualizar usuario
 
 ```http
@@ -247,6 +248,7 @@ Posibles errores:
   "error": "El email ya está registrado"
 }
 ```
+
 ## Eliminar o desactivar usuario
 
 ```http
@@ -290,6 +292,7 @@ Posibles errores:
   "id": 999
 }
 ```
+
 ## Validaciones básicas
 
 La API realiza validaciones manuales antes de crear o actualizar usuarios.
@@ -310,6 +313,7 @@ Ejemplo de error:
   "error": "El nombre debe ser un texto no vacío"
 }
 ```
+
 ## Validación de email
 
 La API normaliza los emails antes de guardarlos o compararlos.
@@ -341,6 +345,7 @@ Código:
 ```http
 409 Conflict
 ```
+
 ## Códigos de estado utilizados
 
 La API utiliza códigos HTTP para indicar el resultado de cada petición.
@@ -369,6 +374,7 @@ Ejemplo de error 409:
   "error": "El email ya está registrado"
 }
 ```
+
 ## Gestión centralizada de errores
 
 La API utiliza un middleware global para devolver errores con un formato común.
@@ -428,6 +434,7 @@ is_active
 created_at
 updated_at
 ```
+
 ## Base de datos con Docker Compose
 
 El proyecto utiliza Docker Compose para levantar PostgreSQL y Adminer.
@@ -554,6 +561,7 @@ Generar cliente:
 ```bash
 npx prisma generate
 ```
+
 ## Modelo Prisma User
 
 El modelo principal del proyecto será `User`.
@@ -683,6 +691,7 @@ Nota:
 ```text
 Los passwordHash son temporales hasta implementar bcrypt en la fase de seguridad.
 ```
+
 ## Consultas básicas con Prisma
 
 La API ya puede consultar usuarios desde PostgreSQL usando Prisma Client.
@@ -864,78 +873,37 @@ DELETE /api/users/:id → isActive = false
 
 La API nunca devuelve `passwordHash`.
 
-## Arquitectura actual
+## Autenticación
 
-El proyecto sigue una arquitectura por capas:
+El proyecto ya incluye una primera ruta de autenticación para registro de usuarios.
 
-```text
-Route → Controller → Service → Repository → Prisma → PostgreSQL
+Ruta:
+
+`POST /api/auth/register`
+
+Body esperado:
+
+```json
+{
+  "name": "Usuario Nuevo",
+  "email": "nuevo@email.com",
+  "password": "123456"
+}
 ```
 
-Estructura principal:
+Respuesta correcta:
 
-```text
-src/
-  prisma.ts
-  server.ts
-  controllers/
-    health.controller.ts
-    user.controller.ts
-  errors/
-    AppError.ts
-  repositories/
-    user.repository.ts
-  routes/
-    health.routes.ts
-    user.routes.ts
-  services/
-    user.service.ts
-  utils/
-    parse.utils.ts
-    string.utils.ts
-```
-
-Rutas principales:
-
-| Método | Ruta | Acción | Respuesta |
-| --- | --- |---|
-| GET | `/api/health` | Comprobar estado de la API |
-| GET | `/api/users` | Listar usuarios |
-| GET | `/api/users/:id` | Consultar usuario |
-| POST | `/api/users` | Crear usuario |
-| PATCH | `/api/users/:id` | Actualizar usuario |
-| DELETE | `/api/users/:id` | Desactivar usuario |
-
-## Seguridad de contraseñas
-
-El proyecto usa `bcrypt` para hashear contraseñas antes de guardarlas en la base de datos.
-
-Instalación:
-
-```bash
-npm install bcrypt
-npm install -D @types/bcrypt
-```
-
-Utilidades principales:
-
-```text
-src/utils/password.utils.ts
-```
-
-Funciones:
-
-```ts
-hashPassword(password)
-comparePassword(password, passwordHash)
-```
+`201 Created`.
 
 Reglas:
 
-- La API recibe `password`.
-- La base de datos guarda `passwordHash`.
-- La contraseña en texto plano nunca se guarda.
+- El email no puede estar repetido.
+- La contraseña se guarda como `passwordHash` usando `bcrypt`.
+- El usuario se registra con `role USER` por defecto.
+- El usuario se registra activo por defecto.
 - `passwordHash` nunca se devuelve al cliente.
+
+Todavía no se genera token JWT. Eso se añadirá más adelante.
 
 ## Documentación del reto
 
@@ -971,3 +939,4 @@ Reglas:
 - [Día 30 - CRUD persistente ordenado](docs/dia-30-crud-persistente-ordenado.md)
 - [Día 31 - Limpieza y refactor](docs/dia-31-limpieza-refactor.md)
 - [Día 32 - Contraseñas seguras con bcrypt](docs/dia-32-bcrypt-passwords.md)
+- [Día 33 - Registro de usuarios](docs/dia-33-auth-register.md)
