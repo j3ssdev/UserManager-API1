@@ -11,6 +11,17 @@ const userSafeSelect = {
   updatedAt: true,
 } as const;
 
+const userWithPasswordSelect = {
+  id: true,
+  name: true,
+  email: true,
+  passwordHash: true,
+  role: true,
+  isActive: true,
+  createdAt: true,
+  updatedAt: true
+} as const;
+
 type CreateUserData = {
   name: string;
   email: string;
@@ -65,6 +76,16 @@ export function findUserByEmail(email: string) {
   });
 }
 
+// Paso 4: Crear findUserByEmailWithPassword
+export function findUserByEmailWithPassword(email: string) {
+  return prisma.user.findUnique({
+    where: {
+      email,
+    },
+    select: userWithPasswordSelect,
+  });
+}
+
 export function createUser(data: CreateUserData) {
   return prisma.user.create({
     data,
@@ -93,5 +114,4 @@ export function deactivateUser(id: number) {
     select: userSafeSelect,
   });
 }
-
 
