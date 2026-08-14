@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-// Paso 13: Importar loginService
 import { loginService, registerService } from "../services/auth.service";
+// Paso 17: Importar AuthenticatedRequest
+import { AuthenticatedRequest } from "../types/auth.types";
 
 export async function registerController(
   req: Request,
@@ -19,7 +20,6 @@ export async function registerController(
   }
 }
 
-// Paso 14: Crear loginController
 export async function loginController(
   req: Request,
   res: Response,
@@ -31,6 +31,24 @@ export async function loginController(
     return res.status(200).json({
       message: "Login correcto",
       data: result
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Paso 17: Crear meController
+export async function meController(
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    return res.status(200).json({
+      message: "Usuario autenticado",
+      data: {
+        user: req.user
+      }
     });
   } catch (error) {
     next(error);

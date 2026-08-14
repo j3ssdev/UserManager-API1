@@ -1004,6 +1004,40 @@ Reglas:
 - El token no contiene `password` ni `passwordHash`.
 - Todavía no se usa para proteger rutas.
 
+## Middleware de autenticación
+
+El proyecto ya puede verificar tokens JWT enviados por el cliente.
+
+Formato de la cabecera:
+
+```text
+Authorization: Bearer <token>
+```
+
+Middleware creado:
+
+```text
+src/middlewares/auth.middleware.ts
+```
+
+El middleware:
+
+- Lee la cabecera `Authorization`.
+- Comprueba que el formato sea `Bearer`.
+- Verifica el token con `JWT_SECRET`.
+- Guarda los datos autenticados en `req.user`.
+- Bloquea la petición si el token falta o es inválido.
+
+Ruta de prueba:
+
+`GET /api/auth/me`
+
+Rutas protegidas:
+
+`/api/users/*`
+
+Todavía no se aplican permisos por rol. Eso se trabajará en el siguiente paso.
+
 ## Documentación del reto
 
 - [Día 1 - Diseño inicial](docs/dia-01-diseno-inicial.md)
@@ -1041,3 +1075,4 @@ Reglas:
 - [Día 33 - Registro de usuarios](docs/dia-33-auth-register.md)
 - [Día 34 - Login de usuarios](docs/dia-34-auth-login.md)
 - [Día 35 - Generación de token JWT](docs/dia-35-jwt.md)
+- [Día 36 - Middleware de autenticación](docs/dia-36-auth-middleware.md)
