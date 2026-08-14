@@ -92,13 +92,13 @@ graph LR
 
 | Prueba | Resultado |
 | --- | --- |
-| `jsonwebtoken` instalado | (./Images/dia35_prueba1.png) |
-| `@types/jsonwebtoken` instalado | (./Images/dia35_prueba2.png) |
-| `JWT_SECRET` configurado | (./Images/dia35_prueba3.png) |
-| `JWT_EXPIRES_IN` configurado | (./Images/dia35_prueba4.png) |
-| `jwt.utils.ts` creado | (./Images/dia35_prueba5.png) |
-| Login correcto devuelve token | (./Images/dia35_prueba6.png) |
-| Login incorrecto no devuelve token | (./Images/dia35_prueba7.png) |
-| Token contiene tres partes separadas por puntos | (./Images/dia35_prueba9.png) |
+| `jsonwebtoken` instalado | ![Imagen](./Images/dia35_prueba1.png) |
+| `@types/jsonwebtoken` instalado | ![Imagen](./Images/dia35_prueba2.png) |
+| `JWT_SECRET` configurado | ![Imagen](./Images/dia35_prueba3.png) |
+| `JWT_EXPIRES_IN` configurado | ![Imagen](./Images/dia35_prueba4.png) |
+| `jwt.utils.ts` creado | ![Imagen](./Images/dia35_prueba5.png) |
+| Login correcto devuelve token | ![Imagen](./Images/dia35_prueba6.png) |
+| Login incorrecto no devuelve token | ![Imagen](./Images/dia35_prueba7.png) |
+| Token contiene tres partes separadas por puntos | ![Imagen](./Images/dia35_prueba9.png) |
 | Token no contiene passwordHash | No lo contiene |
-| `npm run build` funciona | (./Images/dia35_prueba10.png) |
+| `npm run build` funciona | ![Imagen](./Images/dia35_prueba10.png) |
