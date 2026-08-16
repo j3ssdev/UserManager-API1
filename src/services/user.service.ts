@@ -80,12 +80,12 @@ export async function createUserService(input: CreateUserInput) {
     });
   }
   const passwordHash = await hashPassword(cleanPassword);
-  
+
   return createUser({
-  name: cleanName,
-  email: cleanEmail,
-  passwordHash
-});
+    name: cleanName,
+    email: cleanEmail,
+    passwordHash,
+  });
 }
 
 export async function updateUserService(id: number, input: UpdateUserInput) {
@@ -159,4 +159,8 @@ export async function deactivateUserService(id: number) {
   }
 
   return deactivateUser(id);
+}
+
+export async function getCurrentUserService(userId: number) {
+  return getUserByIdService(userId);
 }
