@@ -73,19 +73,20 @@ flowchart TD
     F -- No --> G[403 Forbidden]
     F -- Sí --> H[Controlador]
 ```
+
 ## Checklist de pruebas
 
 | Prueba | Resultado |
 | --- | --- |
-| ADMIN puede hacer `GET /api/users` | ![Imagen](./Images/dia36_prueba1.png) |
-| USER no puede hacer `GET /api/users` | ![Imagen](./Images/dia36_prueba1.png) |
-| ADMIN puede hacer `POST /api/users` | ![Imagen](./Images/dia36_prueba1.png) |
-| USER no puede hacer `POST /api/users` | ![Imagen](./Images/dia36_prueba1.png) |
-| USER puede hacer `GET /api/users/me` | ![Imagen](./Images/dia36_prueba1.png) |
-| USER puede consultar su propio ID | ![Imagen](./Images/dia36_prueba1.png) |
-| USER no puede consultar otro ID | ![Imagen](./Images/dia36_prueba1.png) |
-| USER puede actualizar su nombre | ![Imagen](./Images/dia36_prueba1.png) |
-| USER no puede cambiar `isActive` | ![Imagen](./Images/dia36_prueba1.png) |
-| USER no puede hacer `DELETE /api/users/:id` | ![Imagen](./Images/dia36_prueba1.png) |
-| ADMIN puede hacer `DELETE /api/users/:id` | ![Imagen](./Images/dia36_prueba1.png) |
-| `npm run build` funciona | ![Imagen](./Images/dia36_prueba1.png) |
+| ADMIN puede hacer `GET /api/users` | ![Imagen](./Images/dia37_prueba1.png) |
+| USER no puede hacer `GET /api/users` | ok |
+| ADMIN puede hacer `POST /api/users` | ok |
+| USER no puede hacer `POST /api/users` | ok |
+| USER puede hacer `GET /api/users/me` | ok |
+| USER puede consultar su propio ID | ![Imagen](./Images/dia37_consultar_usuario_id.png) |
+| USER no puede consultar otro ID | ![Imagen](./Images/dia37_user_con%20otro%20usuario.png) |
+| USER puede actualizar su nombre | ![Imagen](./Images/dia37_%20actualizar_nombre.png) |
+| USER no puede cambiar `isActive` | ![Imagen](./Images/dia37_user_intenta_camviar_isActive.png) |
+| USER no puede hacer `DELETE /api/users/:id` | ![Imagen](./Images/dia37_usuario_desactivado.png) |
+| ADMIN puede hacer `DELETE /api/users/:id` | ![Imagen](./Images/dia37_intenta_listar.png) |
+| `npm run build` funciona | ok |
