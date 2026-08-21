@@ -1072,6 +1072,36 @@ Códigos importantes:
 403 → Autenticado, pero sin permiso
 ```
 
+## Arquitectura actual
+
+```
+src/
+├── controllers/
+│   ├── auth.controller.ts
+│   ├── health.controller.ts
+│   └── user.controller.ts
+├── errors/
+│   └── AppError.ts
+├── middlewares/
+│   ├── auth.middleware.ts
+│   └── role.middleware.ts
+├── repositories/
+│   └── user.repository.ts
+├── routes/
+│   ├── auth.routes.ts
+│   ├── health.routes.ts
+│   └── user.routes.ts
+├── services/
+│   ├── auth.service.ts
+│   └── user.service.ts
+├── types/
+│   └── auth.types.ts
+└── utils/
+    ├── jwt.utils.ts
+    ├── parse.utils.ts
+    ├── password.utils.ts
+    └── string.utils.ts
+```
 
 ## Documentación del reto
 
@@ -1112,3 +1142,6 @@ Códigos importantes:
 - [Día 35 - Generación de token JWT](docs/dia-35-jwt.md)
 - [Día 36 - Middleware de autenticación](docs/dia-36-auth-middleware.md)
 - [Día 37 - Roles y permisos](docs/dia-37-roles-permisos.md)
+- [Día 38 - Conexión con el frontend](docs/dia-38-frontend-conexion-api.md)
+- [Día 39 - Pruebas de integración](docs/dia-39-pruebas-integracion-frontend.md)
+- [Día 40 - Revisión final del proyecto](docs/dia-40-revision-final.md)
