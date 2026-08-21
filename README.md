@@ -1072,35 +1072,37 @@ Códigos importantes:
 403 → Autenticado, pero sin permiso
 ```
 
-## Arquitectura actual
+# Arquitectura proyecto
 
-```
+```text
 src/
-├── controllers/
+├── controllers/          # Gestión de peticiones HTTP y respuestas
 │   ├── auth.controller.ts
 │   ├── health.controller.ts
 │   └── user.controller.ts
-├── errors/
+├── errors/               # Manejo centralizado de excepciones
 │   └── AppError.ts
-├── middlewares/
+├── middlewares/          # Interceptores de autenticación y autorización
 │   ├── auth.middleware.ts
 │   └── role.middleware.ts
-├── repositories/
+├── repositories/         # Acceso a base de datos con Prisma
 │   └── user.repository.ts
-├── routes/
+├── routes/               # Enrutamiento de endpoints
 │   ├── auth.routes.ts
 │   ├── health.routes.ts
 │   └── user.routes.ts
-├── services/
+├── services/             # Lógica de negocio y validaciones
 │   ├── auth.service.ts
 │   └── user.service.ts
-├── types/
+├── types/                # Tipos e interfaces globales
 │   └── auth.types.ts
-└── utils/
-    ├── jwt.utils.ts
-    ├── parse.utils.ts
-    ├── password.utils.ts
-    └── string.utils.ts
+├── utils/                # Funciones auxiliares y helpers
+│   ├── jwt.utils.ts
+│   ├── parse.utils.ts
+│   ├── password.utils.ts
+│   └── string.utils.ts
+├── prisma.ts             # Cliente de conexión Prisma
+└── server.ts             # Servidor Express principal
 ```
 
 ## Documentación del reto
