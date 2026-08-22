@@ -79,13 +79,13 @@ flowchart TD
 
 ## Matriz de pruebas
 
-| Acción | Endpoint | Rol necesario | Resultado con USER | Resultado con ADMIN | Captura |
-| --- | --- | --- | --- | --- | --- |
-| Registro | `POST /api/auth/register` | Público | `201` | `201` | ![Imagen](./Images/dia39_prueba1.png) |
-| Login | `POST /api/auth/login` | Público | `200` + JWT | `200` + JWT | ![Imagen](./Images/dia39_prueba2.png) |
-| Ver perfil | `GET /api/users/me` | Autenticado | `200` | `200` | ![Imagen](./Images/dia39_prueba3.png) |
-| Editar nombre | `PATCH /api/users/:id` | Propio o ADMIN | `200` si es propio | `200` | ![Imagen](./Images/dia39_prueba4.png) |
-| Listar usuarios | `GET /api/users` | ADMIN | ![Imagen](./Images/dia39_prueba5.png) | | ![Imagen](./Images/dia39_prueba6.png) |
-| Crear usuario | `POST /api/users` | ADMIN | ![Imagen](./Images/dia39_prueba10.png) | ![Imagen](./Images/dia39_prueba7.png) | ok |
-| Desactivar usuario | `DELETE /api/users/:id` | ADMIN | `403` | ![Imagen](./Images/dia39_prueba7.png) | ok |
-| Ruta sin token | `GET /api/users/me` | Autenticado | `401` | ![Imagen](./Images/dia39_prueba8.png) | ok |
+| Acción | Endpoint | Rol necesario | Resultado con USER | Resultado con ADMIN |
+| --- | --- | --- | --- | --- |  
+| Registro | `POST /api/auth/register` | Público | `201` y `201` | ![Imagen](./Images/dia39_1.png) |
+| Login | `POST /api/auth/login` | Público | `200` + JWT ![Imagen](./Images/dia39_2.png) | `200` + JWT ![Imagen](./Images/dia39_2_2.png) |
+| Ver perfil | `GET /api/users/me` | Autenticado | `200` ![Imagen](./Images/dia39_3.png) | `200` ![Imagen](./Images/dia39_3_2.png) |
+| Editar nombre | `PATCH /api/users/:id` | Propio o ADMIN | `200` si es propio ![Imagen](./Images/dia39_4.png) | `200` |
+| Listar usuarios | `GET /api/users` | ADMIN | `403` ![Imagen](./Images/dia39_5.png) | `200` ![Imagen](./Images/dia39_5_2.png) |
+| Crear usuario | `POST /api/users` | ADMIN | `403` ![Imagen](./Images/dia39_6.png) | `201` ![Imagen](./Images/dia39_6_2.png) |
+| Desactivar usuario | `DELETE /api/users/:id` | ADMIN | `403` | `200` ![Imagen](./Images/dia39_7_2.png) |
+| Ruta sin token | `GET /api/users/me` | Autenticado | `401` y `401` | ![Imagen](./Images/dia39_8.png) |
